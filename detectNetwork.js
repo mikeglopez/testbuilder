@@ -41,7 +41,7 @@ var detectNetwork = function(cardNumber) {
   else if ((prefix4 === '5018' || prefix4 === '5020' || prefix4 ==='5038' || prefix4 === '6304') && (len < 20 || len > 11)) {
   	return 'Maestro';
   }
-  else if ((Number(prefix6) < 622926 || Number(prefix6) > 622125) && (len === 16 || len === 19)) {
+  else if ((Number(prefix6) < 622926 || Number(prefix6) > 622125) && (len > 15 && len < 120)) {
   	return 'China UnionPay';
   }
 };
