@@ -129,7 +129,7 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
-  var should = chai.expect;
+  var expect = chai.expect;
   
   it('has a prefix of 54 and a length of 16', function() {
     expect(detectNetwork('5412345678901234')).to.equal('MasterCard');
@@ -142,10 +142,15 @@ describe('MasterCard', function() {
 });
 
 describe('Discover', function() {
+  var expect = chai.expect;
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  it('has a prefix of 6011 and a length of 16', function() {
+    expect(detectNetwork('6011673984012632')).to.equal('Discover');
+  });
+  it('has a prefix of 6011 and a length of 19', function() {
+    expect(detectNetwork('6011736289371093562')).to.equal('Discover');
+  });
 });
 
 describe('Maestro', function() {
