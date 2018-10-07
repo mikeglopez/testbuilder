@@ -14,34 +14,34 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
   var num = cardNumber.split('');
-  var prefix = num.slice(0, 2).join('');
   var len = num.length;
+  var prefix2 = num.slice(0, 2).join('');
+  var prefix3 = num.slice(0, 3).join('');
+  var prefix4 = num.slice(0, 4).join('');
+  var prefix6 = num.slice(0, 6).join('');
 
-  if (parseInt(num[0]) < 6) {
-    console.log(prefix);
-  	if (len === 14 && (prefix === '38' || prefix === '39')) {
-  		return `Diner's Club`;
-  	}
-  	else if (len === 15 && (prefix === '34' || prefix === '37')) {
-  		return `American Express`
-  	}
-  	else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
-  		return 'Visa';
-  	}
-  	else if ((prefix < 56 && prefix > 50) && len === 16) {
-  		return 'MasterCard';
-  	}
-  	else if (prefix === '65' && (len === 16 || len === 19)) {
-  		return 'Discover';
-  	}
+  if (len === 14 && (prefix2 === '38' || prefix2 === '39')) {
+  	return `Diner's Club`;
   }
-
-  prefix = num.slice(0, 4).join('');
-  console.log(prefix);
-  if (((parseInt(num.slice(0, 3).join('')) < 650 && parseInt(num.slice(0, 3).join('')) > 643) ||(prefix === '6011') || num.slice(0, 2).join('') === '65') && (len === 16 || len === 19)) {
+  else if (len === 15 && (prefix2 === '34' || prefix2 === '37')) {
+  	return `American Express`
+  }
+  else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
+  	return 'Visa';
+  }
+  else if ((Number(prefix2) < 56 && Number(prefix2) > 50) && len === 16) {
+  	return 'MasterCard';
+  }
+  else if (prefix2 === '65' && (len === 16 || len === 19)) {
   	return 'Discover';
   }
-  else if ((prefix === '5018' || prefix === '5020' || prefix ==='5038' || prefix === '6304') && (len < 20 || len > 11)) {
+  else if (((Number(prefix3) < 650 &&  Number(prefix3) > 643) || (prefix4 === '6011') || prefix2 === '65') && (len === 16 || len === 19)) {
+  	return 'Discover';
+  }
+  else if ((prefix4 === '5018' || prefix4 === '5020' || prefix4 ==='5038' || prefix4 === '6304') && (len < 20 || len > 11)) {
   	return 'Maestro';
+  }
+  else if ((Number(prefix6) < 622926 || Number(prefix6) > 622125) && (len === 16 || len === 19)) {
+  	return 'China UnionPay';
   }
 };
