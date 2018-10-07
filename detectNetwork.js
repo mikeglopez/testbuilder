@@ -17,20 +17,31 @@ var detectNetwork = function(cardNumber) {
   var prefix = num.slice(0, 2).join('');
   var len = num.length;
 
-  if (len === 14 && (prefix === '38' || prefix === '39')) {
-  	return `Diner's Club`;
+  if (parseInt(num[0]) < 6) {
+  	if (len === 14 && (prefix === '38' || prefix === '39')) {
+  		return `Diner's Club`;
+  	}
+  	else if (len === 15 && (prefix === '34' || prefix === '37')) {
+  		return `American Express`
+  	}
+  	else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
+  		return 'Visa';
+  	}
+  	else if ((prefix < 56 && prefix > 50) && len === 16) {
+  		return 'MasterCard';
+  	}
+  	else if (prefix === '65' && (len === 16 || len === 19)) {
+  		return 'Discover';
+  	}
+  	else {
+  		return `Error: Please enter a valid credit card number`;
+  	}
   }
-  else if (len === 15 && (prefix === '34' || prefix === '37')) {
-  	return `American Express`
-  }
-  else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
-  	return 'Visa';
-  }
-  else if ((prefix < 56 && prefix > 50) && len === 16) {
-  	return 'MasterCard';
-  }
+
   else {
-  	return `Error: Please enter a valid credit card number`;
+  	prefix = num.slice(0, 3).join('');
+  	if (((parseInt(prefix) < 650 && parseInt(prefix) > 643) || (num.slice(0, 4).join('') === '6011')) && (len === 16 || len === 19)) {
+  		return 'Discover';
+  	}
   }
 };
-
