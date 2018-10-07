@@ -18,6 +18,7 @@ var detectNetwork = function(cardNumber) {
   var len = num.length;
 
   if (parseInt(num[0]) < 6) {
+    console.log(prefix);
   	if (len === 14 && (prefix === '38' || prefix === '39')) {
   		return `Diner's Club`;
   	}
@@ -33,15 +34,14 @@ var detectNetwork = function(cardNumber) {
   	else if (prefix === '65' && (len === 16 || len === 19)) {
   		return 'Discover';
   	}
-  	else {
-  		return `Error: Please enter a valid credit card number`;
-  	}
   }
 
-  else {
-  	prefix = num.slice(0, 3).join('');
-  	if (((parseInt(prefix) < 650 && parseInt(prefix) > 643) || (num.slice(0, 4).join('') === '6011')) && (len === 16 || len === 19)) {
-  		return 'Discover';
-  	}
+  prefix = num.slice(0, 4).join('');
+  console.log(prefix);
+  if (((parseInt(num.slice(0, 3).join('')) < 650 && parseInt(num.slice(0, 3).join('')) > 643) ||(prefix === '6011') || num.slice(0, 2).join('') === '65') && (len === 16 || len === 19)) {
+  	return 'Discover';
+  }
+  else if ((prefix === '5018' || prefix === '5020' || prefix ==='5038' || prefix === '6304') && (len < 20 || len > 11)) {
+  	return 'Maestro';
   }
 };
