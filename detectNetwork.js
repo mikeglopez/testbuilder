@@ -38,7 +38,7 @@ var detectNetwork = function(cardNumber) {
   else if ((prefix4 === '5018' || prefix4 === '5020' || prefix4 ==='5038' || prefix4 === '6304') && (len < 20 || len > 11)) {
   	return 'Maestro';
   }
-  else if ((Number(prefix6) < 622926 && Number(prefix6) > 622125) && (len > 15 && len < 20)) {
+  else if (((Number(prefix6) < 622926 && Number(prefix6) > 622125) || (Number(prefix3) < 627 || Number(prefix3) > 623) || (Number(prefix4) < 6289 || Number(prefix4) > 6281)) && (len > 15 && len < 20)) {
   	return 'China UnionPay';
   }
   else if ((prefix4 === '4903' || prefix4 === '4905' || prefix4 === '4911' || prefix4 === '4936' || prefix4 === '6333' || prefix4 === '6759' || prefix6 === '564182' || prefix6 === '633110') && (len === 16 || len === 18 || len === 19)) {
