@@ -26,6 +26,12 @@ var detectNetwork = function(cardNumber) {
   else if (len === 15 && (prefix2 === '34' || prefix2 === '37')) {
   	return `American Express`
   }
+  else if ((prefix4 === '4903' || prefix4 === '4905' || prefix4 === '4911' || prefix4 === '4936' || prefix4 === '6333' || prefix4 === '6759' || prefix6 === '564182' || prefix6 === '633110') && (len === 16 || len === 18 || len === 19)) {
+  	return 'Switch';
+  }
+  else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
+  	return 'Visa';
+  }
   else if ((Number(prefix2) < 56 && Number(prefix2) > 50) && len === 16) {
   	return 'MasterCard';
   }
@@ -40,11 +46,5 @@ var detectNetwork = function(cardNumber) {
   }
   else if (((Number(prefix6) < 622926 && Number(prefix6) > 622125) || (Number(prefix3) < 627 || Number(prefix3) > 623) || (Number(prefix4) < 6289 || Number(prefix4) > 6281)) && (len > 15 && len < 20)) {
   	return 'China UnionPay';
-  }
-  else if ((prefix4 === '4903' || prefix4 === '4905' || prefix4 === '4911' || prefix4 === '4936' || prefix4 === '6333' || prefix4 === '6759' || prefix6 === '564182' || prefix6 === '633110') && (len === 16 || len === 18 || len === 19)) {
-  	return 'Switch';
-  }
-  else if (num[0] === '4' && (len === 13 || len === 16 || len === 19)) {
-  	return 'Visa';
   }
 };
