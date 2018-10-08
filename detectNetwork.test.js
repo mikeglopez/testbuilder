@@ -166,6 +166,9 @@ describe('Discover', function() {
   it('has a prefix of 65 and a length of 16', function() {
     expect(detectNetwork('6582778394726485')).to.equal('Discover');
   });
+  it('has a prefix of 65 and a length of 19', function() {
+    expect(detectNetwork('6537485926402947268')).to.equal('Discover');
+  });
   it('has a prefix of 6011 and a length of 16', function() {
     expect(detectNetwork('6011673984012632')).to.equal('Discover');
   });
