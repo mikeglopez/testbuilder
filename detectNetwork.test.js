@@ -219,4 +219,30 @@ describe('China UnionPay', function() {
   });
 
 });
-describe('should support Switch')
+describe('Switch', function() {
+  var expect = chai.expect;
+  it('has a prefix of 4903 and a length of 16', function() {
+    expect(detectNetwork('4903622126186443')).to.equal('Switch');
+  });
+  it('has a prefix of 4905 and a length of 18', function() {
+    expect(detectNetwork('490521261864436728')).to.equal('Switch');
+  });
+  it('has a prefix of 4911 and a length of 19', function() {
+    expect(detectNetwork('4911126128644367238')).to.equal('Switch');
+  });
+  it('has a prefix of 4936 and a length of 16', function() {
+    expect(detectNetwork('4936186443673228')).to.equal('Switch');
+  });
+  it('has a prefix of 564182 and a length of 18', function() {
+    expect(detectNetwork('564182123618644367')).to.equal('Switch');
+  });
+  it('has a prefix of 633110 and a length of 19', function() {
+    expect(detectNetwork('6331102536186443673')).to.equal('Switch');
+  });
+  it('has a prefix of 6333 and a length of 16', function() {
+    expect(detectNetwork('6333261864438739')).to.equal('Switch');
+  });
+  it('has a prefix of 6759 and a length of 18', function() {
+    expect(detectNetwork('675921261864728234')).to.equal('Switch');
+  });
+})
