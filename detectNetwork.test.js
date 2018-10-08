@@ -175,18 +175,52 @@ describe('Discover', function() {
 describe('Maestro', function() {
   var expect = chai.expect;
   // Write full test coverage for the Maestro card
-    var prefix = [5018, 5020, 5038, 6304];
-    var base = '12345678';
-    var input = '';
-    for (var i = 0; i < prefix.length; i++) {
-      for (var len = 12; len < 20; len++) { // loops through all lengths between 12 and 19
-        input = prefix[i].toString() + base; // 12 char length base
-        it(`has a prefix of ${prefix[i]} and a length of ${len}`, function() {
+  var prefix = [5018, 5020, 5038, 6304];
+  var base = '12345678';
+  for (var i = 0; i < prefix.length; i++) {
+    (function(prefix) {
+      var input = prefix[i].toString() + base;
+        it('has a prefix of ' + prefix[i] + ' and a length of 12', function() {
           expect(detectNetwork(input)).to.equal('Maestro');
         });
-        base += '0'; // increase length of input
-      }
-    }
+        it('has a prefix of ' + prefix[i] + ' and a length of 13', function() {
+          expect(detectNetwork(input + '0')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 14', function() {
+          expect(detectNetwork(input + '00')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 15', function() {
+          expect(detectNetwork(input + '000')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 16', function() {
+          expect(detectNetwork(input + '0000')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 17', function() {
+          expect(detectNetwork(input + '00000')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 18', function() {
+          expect(detectNetwork(input + '000000')).to.equal('Maestro');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 19', function() {
+          expect(detectNetwork(input + '0000000')).to.equal('Maestro');
+        });
+    }) (prefix)
+  }
+
+
+
+    // var prefix = [5018, 5020, 5038, 6304];
+    // var base = '12345678';
+    // var input = '';
+    // for (var i = 0; i < prefix.length; i++) {
+      // for (var len = 12; len < 20; len++) { // loops through all lengths between 12 and 19
+      //   input = prefix[i].toString() + base; // 12 char length base
+      //   it(`has a prefix of ${prefix[i]} and a length of ${len}`, function() {
+      //     expect(detectNetwork(input)).to.equal('Maestro');
+      //   });
+      //   base += '0'; // increase length of input
+      // }
+   // }
 });
 
 describe('China UnionPay', function() {
