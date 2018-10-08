@@ -298,20 +298,41 @@ describe('Maestro', function() {
 
 describe('China UnionPay', function() {
   var expect = chai.expect;
-  it('has a prefix of 622126 and a length of 16', function() {
-    expect(detectNetwork('6221261864436728')).to.equal('China UnionPay');
-  });
-  it('has a prefix of 622325 and a length of 17', function() {
-    expect(detectNetwork('62232550186443672')).to.equal('China UnionPay');
-  });
-  it('has a prefix of 622525 and a length of 18', function() {
-    expect(detectNetwork('622525864436728367')).to.equal('China UnionPay');
-  });
-  it('has a prefix of 622925 and a length of 19', function() {
-    expect(detectNetwork('6229250182644436728')).to.equal('China UnionPay');
-  });
-
+  for (var prefix = 622126; prefix < 622926; prefix++) { // loops through all the prefixes between 622126 and 622925
+    var base = '1234567890';
+    var input = '';
+    for (var len = 16; len < 20; len++) { // loops through all lengths between 16 and 19
+      input = prefix.toString() + base; // 16 char length base
+      it(`has a prefix of ${prefix} and a length of ${len}`, function() {
+        expect(detectNetwork(input)).to.equal('China UnionPay');
+      });
+      base += '0'; // increase length of input
+    }
+  }
+  for (var prefix = 624; prefix < 627; prefix++) { // loops through all the prefixes between 624 and 626
+    var base = '1234567890123';
+    var input = '';
+    for (var len = 16; len < 20; len++) { // loops through all lengths between 16 and 19
+      input = prefix.toString() + base; // 16 char length base
+      it(`has a prefix of ${prefix} and a length of ${len}`, function() {
+        expect(detectNetwork(input)).to.equal('China UnionPay');
+      });
+      base += '0'; // increase length of input
+    }
+  }
+  for (var prefix = 6282; prefix < 6289; prefix++) { // loops through all the prefixes between 6282 and 6288
+    var base = '123456789012';
+    var input = '';
+    for (var len = 16; len < 20; len++) { // loops through all lengths between 16 and 19
+      input = prefix.toString() + base; // 16 char length base
+      it(`has a prefix of ${prefix} and a length of ${len}`, function() {
+        expect(detectNetwork(input)).to.equal('China UnionPay');
+      });
+      base += '0'; // increase length of input
+    }
+  }
 });
+
 describe('Switch', function() {
   var expect = chai.expect;
   it('has a prefix of 4903 and a length of 16', function() {
