@@ -155,17 +155,6 @@ describe('Discover', function() {
     });
     base += '000'; // increase length of input
   }
-  for (var prefix = 644; prefix < 650; prefix++) { // loops through all the prefixes between 644 and 650
-    base = '1234567890123';
-    input = '';
-    for (var len = 16; len < 20; len += 3) { // loops through lengths 16 and 19
-      input = prefix.toString() + base; // 16 char length base
-      it(`has a prefix of ${prefix} and a length of ${len}`, function() {
-        expect(detectNetwork(input)).to.equal('Discover');
-      });
-      base += '0'; // increase length of input
-    }
-  }
   prefix = 65;
   base = '12345678901234';
   input = '';
@@ -175,6 +164,17 @@ describe('Discover', function() {
       expect(detectNetwork(input)).to.equal('Discover');
     });
     base += '000'; // increase length of input
+  }
+  base = '1234567890123';
+  for (var prefix = 644; prefix <= 649; prefix++) {
+    (function(prefix) {
+        it('has a prefix of ' + prefix + ' and a length of 16', function() {
+          expect(detectNetwork(prefix.toString() + base)).to.equal('Discover');
+        });
+        it('has a prefix of ' + prefix + ' and a length of 19', function() {
+          expect(detectNetwork(prefix.toString() + base + '000')).to.equal('Discover');
+        });
+    }) (prefix)
   }
 });
 
