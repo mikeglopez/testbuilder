@@ -145,25 +145,19 @@ describe('Discover', function() {
   var expect = chai.expect;
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  var prefix = 6011;
+  var prefix = [6011, 65];
   var base = '123456789012';
-  var input = '';
-  for (var len = 16; len < 20; len += 3) { // loops through lengths 16 and 19
-    input = prefix.toString() + base; // 16 char length base
-    it(`has a prefix of ${prefix} and a length of ${len}`, function() {
-      expect(detectNetwork(input)).to.equal('Discover');
-    });
-    base += '000'; // increase length of input
-  }
-  prefix = 65;
-  base = '12345678901234';
-  input = '';
-  for (var len = 16; len < 20; len += 3) { // loops through lengths 16 and 19
-    input = prefix.toString() + base; // 16 char length base
-    it(`has a prefix of ${prefix} and a length of ${len}`, function() {
-      expect(detectNetwork(input)).to.equal('Discover');
-    });
-    base += '000'; // increase length of input
+  for (var i = 0; i < prefix.length; i++) {
+    (function(prefix) {
+      var input = prefix[i].toString() + base;
+        it('has a prefix of ' + prefix[i] + ' and a length of 16', function() {
+          expect(detectNetwork(input)).to.equal('Discover');
+        });
+        it('has a prefix of ' + prefix[i] + ' and a length of 19', function() {
+          expect(detectNetwork(input + '000')).to.equal('Discover');
+        });
+    }) (prefix)
+    base += '00';
   }
   base = '1234567890123';
   for (var prefix = 644; prefix <= 649; prefix++) {
